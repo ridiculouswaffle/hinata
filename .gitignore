@@ -1,0 +1,10 @@
+# Exclude all of these
+.cache/
+auto-save-list
+*.org~
+*.el~
+eln-cache/
+straight/
+tramp
+url/
+recentf
