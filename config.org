@@ -21,13 +21,13 @@ You wouldn't have the need to use most of the other programs.
 
 ** What makes this config cute?
 
-The use of emojis, src_bash{all-the-icons} and my own theme, [[https://github.com/ridiculouswaffle/hanami-emacs][Hanami]] makes
+The use of emojis, all-the-icons and my own theme, [[https://github.com/ridiculouswaffle/hanami-emacs][Hanami]] makes
 my config cute. It's basically a combination of a lot of things.
 
 ** Ok. How do I use this config?
 
-Cloning this repo to your src_bash{user-emacs-directory} would be enough, but you can copy this file to your user-emacs-directory and type
-src_emacs-lisp{(org-babel-load-file (concat user-emacs-directory "config.org"))} to load this configuration!
+Cloning this repo to your user-emacs-directory would be enough, but you can copy this file to your user-emacs-directory and type
+(org-babel-load-file (concat user-emacs-directory "config.org")) to load this configuration!
 
 Now, onto the configuration
 
@@ -62,12 +62,12 @@ This significantly improves the performance of terminal emulators and LSP in Ema
 
 The value is set to 16x 1024MB (which is 16MB).
 
-Long before when I was new to Emacs, I used src_bash{package.el} as it was builtin and worked pretty well. But after some time, I realized that
-if I had to make a portable configuration, I need to use src_bash{straight.el} instead.
+Long before when I was new to Emacs, I used package.el as it was builtin and worked pretty well. But after some time, I realized that
+if I had to make a portable configuration, I need to use straight.el instead.
 
 It is also helpful for me cause' I don't have my theme on MEPLA at the moment.
 
-Let's install src_bash{straight.el}:
+Let's install straight.el:
 
 #+begin_src emacs-lisp
   (defvar bootstrap-version)
@@ -109,21 +109,21 @@ Next is autosaves. If backups are /literal backups of your files/, autosaves are
 for a long time. Saving these kind of files will usually delete the autosave. Autosaves work *everywhere*, regardless of version control.
 
 Why? Imagine when you are editing your file mid-way, your computer crashes, or a power cut. If autosaves are enabled (they are, by default),
-you can recover your edits by using src_bash{M-x recover-file}. Very useful, right?
+you can recover your edits by using M-x recover-file. Very useful, right?
 
 I haven't changed anything in autosaves right now, since the defaults suffice. I hope the explanation was helpful, though!
 
 Now, we're gonna install a package that fixes a very important issue in MacOS and Linux, shell variables.
 
-Let's say you installed src_bash{macchina} from your distro/OS's package manager (what, you want me to install src_bash{neofetch}?
-It's dead). You can easily run src_bash{macchina} in your terminals, but not through Emacs. The reason being Emacs doesn't know
-where src_bash{macchina} is. Your shell does, by using the src_bash{PATH} variable. This variable is not sent to Emacs when:
+Let's say you installed fastfetch from your distro/OS's package manager (what, you want me to install neofetch?
+It's dead). You can easily run fastfetch in your terminals, but not through Emacs. The reason being Emacs doesn't know
+where macchina is. Your shell does, by using the PATH variable. This variable is not sent to Emacs when:
 
-- You are using Linux/*BSD, launching Emacs as a daemon, especially from src_bash{systemd}
+- You are using Linux/*BSD, launching Emacs as a daemon, especially from systemd
 - You are using MacOS, launching Emacs as a daemon
 
-To fix this, you need to install a package named src_bash{exec-path-from-shell}. This package fixes this issue by retrieving
-the src_bash{PATH} variable and setting it to Emacs on runtime.
+To fix this, you need to install a package named exec-path-from-shell. This package fixes this issue by retrieving
+the PATH variable and setting it to Emacs on runtime.
 
 The installation and usage is /very simple/. You just need these 3 lines:
 
@@ -133,7 +133,7 @@ The installation and usage is /very simple/. You just need these 3 lines:
     (exec-path-from-shell-initialize))
 #+end_src
 
-And the src_bash{PATH} variable will be copied to Emacs from your shell everytime Emacs is run as a daemon (regardless of OS).
+And the PATH variable will be copied to Emacs from your shell everytime Emacs is run as a daemon (regardless of OS).
 
 Don't just copy-paste this code to your config! You need straight.el for it.
 
@@ -301,7 +301,7 @@ Vertico (unless you use Ivy or Helm). This is how you install Marginlia
 
 ** Orderless
 
-[[https://github.com/oantolin/orderless][Orderless]] is a package that makes things that use src_bash{completing-read} (which covers the minibuffer, in-buffer completion and
+[[https://github.com/oantolin/orderless][Orderless]] is a package that makes things that use completing-read (which covers the minibuffer, in-buffer completion and
 read-string calls) orderless! You can type with any order to get the command you want. Once you try it, you can never go back.
 
 Setup is simple, got it from the README:
@@ -320,16 +320,16 @@ Setup is simple, got it from the README:
 you how it improves your Emacs experience:
 
 Let's say you want to kill a buffer. This, without Embark, will be done by:
-- Pressing src_bash{C-x k}
+- Pressing C-x k
 - Select the buffer and press Enter
 
 This is how it's normally done. While this works, what if you wanted to do this /a lot/? This is where Embark comes. You can execute
 this without leaving the minibuffer! Let me show tell you how this works, with the same scenario, but to delete many buffers:
 
-- You press src_bash{C-x b} instead of src_bash{C-x k}
+- You press C-x b instead of C-x k
 - Select the buffer you want to delete currently
-- Press src_bash{C-.} (popular keybinding to use Embark. It's the same in this config)
-- Select what you want to do with that buffer. In our case, it's delete so type src_bash{d}
+- Press C-. (popular keybinding to use Embark. It's the same in this config)
+- Select what you want to do with that buffer. In our case, it's delete so type d
 
 This is just the simplest example to how Embark can be useful to you. This can be done anywhere! The setup is pretty simple:
 
@@ -399,7 +399,7 @@ There are currently 3 ways you can add LSP support for Emacs:
 The reason why I chose lsp-mode instead of the other 3 are:
 
 - It's the most used (duh)
-- It supports src_bash{dap-mode}, a package necessary for debugging your code in Emacs
+- It supports dap-mode, a package necessary for debugging your code in Emacs
 - It is the most feature rich! You have code lens, references and more!
 
 LSP mode is easy to setup, but it is a bit repetitive for language support. When it comes to programming languages,
@@ -464,7 +464,7 @@ Now, to the installation:
 
 ** Web (HTML, PHP, JSX and templating languages like these)
 
-For this, all you need is src_bash{web-mode} and enabling LSP in that buffer, and LSP mode is gonna run the relevant langauge server for
+For this, all you need is web-mode and enabling LSP in that buffer, and LSP mode is gonna run the relevant langauge server for
 the buffer's file extension. Pretty cool!
 
 #+begin_src emacs-lisp
