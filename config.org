@@ -451,9 +451,10 @@ This section is gonna install language support for all of these languages:
 - Rust
 - Clojure
 
-More languages will be added when I have time for it!
+Along with this, if there is any quality of life packages specifically made for these languages like REPLs and such, it will also
+be installed here. More languages will be added when I have time for it!
 
-But before I do that, I need to add some minor modes for programming buffers. I'll comment what they are:
+But before I start installing languages, I need to add some minor modes for programming buffers. I'll comment what they are:
 
 #+begin_src emacs-lisp
   (add-hook 'prog-mode-hook 'hl-line-mode) ;; Highlights the current line
@@ -471,15 +472,14 @@ the buffer's file extension. Pretty cool!
   (use-package web-mode
     :straight t
     :defer t
+    :mode (("\\.phtml\\'" . web-mode)
+	   ("\\.tpl\\.php\\'" . web-mode)
+	   ("\\.[agj]sp\\'" . web-mode)
+	   ("\\.as[cp]x\\'" . web-mode)
+	   ("\\.erb\\'" . web-mode)
+	   ("\\.mustache\\'" . web-mode)
+	   ("\\.djhtml\\'" . web-mode))
     :config
-    ;; Directly copypasted from the website: https://web-mode.org/
-    (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
     :hook ((web-mode . lsp-deferred)))
 #+end_src
 
@@ -532,4 +532,13 @@ The major mode, like Rust, is also not installed by default
     :defer t
     :hook ((clojure-mode . lsp-deferred)
 	   (clojurescript-mode . lsp-deferred)))
+#+end_src
+
+You know what they say, you ain't a good Lisper without a REPL, so we need [[https://cider.mx/][CIDER]]! Installation is pretty simple, just these 3
+lines of code:
+
+#+begin_src emacs-lisp
+  (use-package cider
+    :straight t
+    :defer t)
 #+end_src
